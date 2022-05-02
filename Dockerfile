@@ -29,6 +29,38 @@ RUN 	<<-EOF
 	        | sh -s -- --default-toolchain stable --profile default --no-modify-path -y
 EOF
 
+# google test
+RUN	<<-EOF
+	set -e
+	git clone https://github.com/google/googletest.git /tmp/gtest
+	cd /tmp/gtest
+	mkdir build && cd build
+	cmake ..
+	make
+	make install
+	cd / && rm -rf /tmp/gtest
+EOF
+
+# google benchmark
+RUN	<<-EOF
+	set -e
+	git clone https://github.com/google/benchmark.git /tmp/gbench
+	cd /tmp/gbench
+	cmake -E make_directory "build"
+	cmake -E chdir "build" cmake -DBENCHMARK_DOWNLOAD_DEPENDENCIES=on -DCMAKE_BUILD_TYPE=Release ..
+	cmake --build "build" --config Release --target install
+	cd / && rm -rf /tmp/gbench
+EOF
+
+# nodejs npm
+RUN	<<-EOF
+	set -e
+	yum -y update
+	mkdir /tmp/node && cd /tmp/node
+	curl -sL https://rpm.nodesource.com/setup_16.x | bash -
+	yum -y install nodejs
+EOF
+
 # vim
 RUN 	<<-EOF
 	set -e
@@ -79,6 +111,21 @@ RUN 	<<-EOF
 	./configure
 	make && make install
 	cd / && rm -rf /tmp/tmux
+EOF
+
+# powerline fonts
+RUN	<<-EOF
+	set -e
+	mkdir /tmp/powerline && cd /tmp/powerline
+	git clone https://github.com/powerline/fonts .
+	./install.sh
+	cd / && rm -rf /tmp/powerline
+EOF
+
+# tmux themes
+RUN	<<-EOF
+	set -e
+	git clone https://github.com/jimeh/tmux-themepack.git ~/.tmux-themepack
 EOF
 
 # exa, bat, fd-find
