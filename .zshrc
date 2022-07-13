@@ -3,6 +3,10 @@
 
 # Path to your oh-my-zsh installation.
 export ZSH="$HOME/.oh-my-zsh"
+export PATH=/usr/local/Qt-6.3.1/bin:$PATH
+export PATH=/opt/homebrew/opt/qt@5/bin:$PATH
+
+#export LDFLAGS="-L/opt/homebrew/opt/llvm/lib -Wl,-rpath,/opt/homebrew/opt/llvm/lib":$LDFLAGS
 
 export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
 
@@ -10,7 +14,8 @@ export LD_LIBRARY_PATH=/usr/local/lib:$LD_LIBRARY_PATH
 # load a random theme each time oh-my-zsh is loaded, in which case,
 # to know which specific one was loaded, run: echo $RANDOM_THEME
 # See https://github.com/ohmyzsh/ohmyzsh/wiki/Themes
-ZSH_THEME="gnzh"
+# ZSH_THEME="gnzh"
+ZSH_THEME="agnoster"
 
 # Set list of themes to pick from when loading at random
 # Setting this variable when ZSH_THEME=random will cause zsh to load
@@ -111,20 +116,26 @@ alias imgcat='$HOME/Documents/dev/script/imgcat.sh'
 alias imgls='$HOME/Documents/dev/script/imgls.sh'
 alias divider='$HOME/Documents/dev/script/divider.sh'
 
-alias cpp_create='$HOME/Documents/dev/cpp/cpp_create/release/2.0/cpp_create'
+alias cat='bat'
+
+alias python='python3'
+
+alias cpp_create='$HOME/Documents/dev/cpp/cpp_create/release/v0.0.3/create_project'
 
 alias docker-ide='docker run --rm -it -u$(id -u):$(id -g)                     \
 	--detach-keys="ctrl-z,z"                                              \
 	-v $HOME/.oh-my-zsh:/home/edo/.oh-my-zsh                              \
 	-v $HOME/.ssh:/home/edo/.ssh                                          \
-	-v $HOME/.gitconfig:/home/edo/.gitconfig                              \
 	-v $HOME/.vim:/home/edo/.vim                                          \
 	-v $HOME/.zshrc:/home/edo/.zshrc                                      \
 	-v $HOME/.vimrc:/home/edo/.vimrc                                      \
 	-v $HOME/.docker-home:/home/edo                                       \
+	-v $HOME/.gitconfig:/home/edo/.gitconfig                              \
 	-v $HOME/Documents/dev:/home/edo/dev                                  \
-	-v $HOME/Documents/dev/devenv/etc/passwd/passwd:/etc/passwd:ro        \
+	-v /etc/passwd:/etc/passwd:ro                                         \
 	-v /private/etc/group:/etc/group:ro                                   \
 	--network host                                                        \
 	--privileged                                                          \
 	-w/home/edo'
+
+export PATH="/opt/homebrew/opt/bison/bin:$PATH"
