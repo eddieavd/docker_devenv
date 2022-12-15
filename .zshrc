@@ -95,10 +95,6 @@ source $ZSH/oh-my-zsh.sh
 #   export EDITOR='vim'  #  mvim by default
 # fi
 
-function mcdir() {
-    mkdir -p $1 && cd $1
-}
-
 # Compilation flags
 # export ARCHFLAGS="-arch x86_64"
 
@@ -112,6 +108,21 @@ function mcdir() {
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 # alias vim='/usr/local/bin/vim'
 
+function mcdir() {
+    mkdir -p $1 && cd $1
+}
+
+function sponge() {
+    args=$@
+    vim +":Suponjibobu $args" +q!
+}
+
+# fuzzy cd
+alias fcd="cd \"\$(fd -t d --full-path . | fzf || echo .)\""
+
+alias zshrc='vim ~/.zshrc'
+alias vimrc='vim ~/.vimrc'
+
 alias imgcat='$HOME/Documents/dev/script/imgcat.sh'
 alias imgls='$HOME/Documents/dev/script/imgls.sh'
 alias divider='$HOME/Documents/dev/script/divider.sh'
@@ -120,7 +131,18 @@ alias cat='bat'
 
 alias python='python3'
 
-alias cpp_create='$HOME/Documents/dev/cpp/cpp_create/release/v0.0.3/create_project'
+# alias cpp_create='$HOME/Documents/dev/cpp/cpp_create/release/v1.0.0/create_project'
+alias cpp_create='$HOME/Documents/dev/cpp/cpp_create/cmake-build-release/create_project'
+
+alias cppfront='$HOME/Documents/dev/cpp/cppfront/master/build/cppfront'
+
+# alias amalgam='$HOME/Documents/dev/cpp/amalgam/exe/amalgam'
+alias alamgam='python3 $HOME/Documents/dev/py/cpp_amalgam/cpp-amalgamate/cpp-amalgamate/amalgamate.py'
+
+alias drot='ssh drot'
+alias sfdrotp='sftp drot'
+
+alias halo_policija='ssh drot'
 
 alias docker-ide='docker run --rm -it -u$(id -u):$(id -g)                     \
 	--detach-keys="ctrl-z,z"                                              \
@@ -139,3 +161,9 @@ alias docker-ide='docker run --rm -it -u$(id -u):$(id -g)                     \
 	-w/home/edo'
 
 export PATH="/opt/homebrew/opt/bison/bin:$PATH"
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/Users/edhemavdagic/Documents/gcloud_sdk/path.zsh.inc' ]; then . '/Users/edhemavdagic/Documents/gcloud_sdk/path.zsh.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/Users/edhemavdagic/Documents/gcloud_sdk/completion.zsh.inc' ]; then . '/Users/edhemavdagic/Documents/gcloud_sdk/completion.zsh.inc'; fi
