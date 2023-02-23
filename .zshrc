@@ -144,7 +144,22 @@ alias sfdrotp='sftp drot'
 
 alias halo_policija='ssh drot'
 
-alias docker-ide='docker run --rm -it -u$(id -u):$(id -g)                     \
+alias docker-ide='docker run --rm -it -u$(id -u):$(id -g)                    \
+        --detach-keys="ctrl-z,z"                                              \
+        --name docker-ide                                                      \
+        --mount type=bind,source=$HOME/.oh-my-zsh,target=/home/edo/.oh-my-zsh   \
+        --mount type=bind,source=$HOME/.ssh,target=/home/edo/.ssh                \
+        --mount type=bind,source=$HOME/.vim,target=/home/edo/.vim                 \
+        --mount type=bind,source=$HOME/.zshrc,target=/home/edo/.zshrc              \
+        --mount type=bind,source=$HOME/.vimrc,target=/home/edo/.vimrc               \
+        --mount type=bind,source=$HOME/docs,target=/home/edo/docs                    \
+        --mount type=bind,source=$HOME/etc/passwd,target=/etc/passwd                  \
+        --mount type=bind,source=$HOME/etc/group,target=/etc/group                     \
+        --network host                                                                  \
+        --privileged                                                                     \
+        -w/home/edo'
+
+alias docker-ide-old='docker run --rm -it -u$(id -u):$(id -g)                 \
 	--detach-keys="ctrl-z,z"                                              \
 	-v $HOME/.oh-my-zsh:/home/edo/.oh-my-zsh                              \
 	-v $HOME/.ssh:/home/edo/.ssh                                          \
@@ -160,10 +175,18 @@ alias docker-ide='docker run --rm -it -u$(id -u):$(id -g)                     \
 	--privileged                                                          \
 	-w/home/edo'
 
+alias docker-ide-root='docker run --rm -it -u0:0               \
+        --detach-keys="ctrl-z,z"                               \
+        -v /home/eavdagic/.oh-my-zsh:/root/.oh-my-zsh          \
+        -v /home/eavdagic/.ssh:/root/.ssh                      \
+        -v /home/eavdagic/.vim:/root/.vim                      \
+        -v /home/eavdagic/.zshrc:/root/.zshrc                  \
+        -v /home/eavdagic/.vimrc:/root/.vimrc                  \
+        -v /home/eavdagic/docs:/root/docs                      \
+        -v /home/eavdagic/etc/passwd:/etc/passwd:ro            \
+        -v /home/eavdagic/etc/group:/etc/group:ro              \
+        --network host                                         \
+        --privileged                                           \
+        -w/root'
+
 export PATH="/opt/homebrew/opt/bison/bin:$PATH"
-
-# The next line updates PATH for the Google Cloud SDK.
-if [ -f '/Users/edhemavdagic/Documents/gcloud_sdk/path.zsh.inc' ]; then . '/Users/edhemavdagic/Documents/gcloud_sdk/path.zsh.inc'; fi
-
-# The next line enables shell command completion for gcloud.
-if [ -f '/Users/edhemavdagic/Documents/gcloud_sdk/completion.zsh.inc' ]; then . '/Users/edhemavdagic/Documents/gcloud_sdk/completion.zsh.inc'; fi

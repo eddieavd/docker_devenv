@@ -130,7 +130,6 @@ let mapleader=" "
 
 nnoremap <leader>c :CMakeSelectBuildType debug<CR>
 nnoremap <leader>r :CMakeSelectBuildType release<CR>
-nnoremap <leader>cd :CMakeSelectBuildType dev-release<CR>
 nnoremap <leader>b :CMakeBuild<CR>
 nnoremap <leader>y :YcmShowDetailedDiagnostic<CR>
 nnoremap <leader>t :bNext<CR>
